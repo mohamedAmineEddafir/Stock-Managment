@@ -2,6 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
+/*you need to nodify thise part in all db connection { namedb", "name-local", "password" }*/
+
 package AppPack;
 
 import java.awt.HeadlessException;
@@ -396,7 +399,7 @@ public final class AppInterface extends javax.swing.JFrame {
             String sql = "INSERT INTO stocktable" 
                     +" (hostname, username, computermodel, clavier, souris, courdent, casque)"
                     +" VALUES (?, ?, ?, ?, ?, ?, ?)";
-            sqlcon = DriverManager.getConnection("jdbc:mysql://localhost/stockmts", "root", "Ay1425@@");
+            sqlcon = DriverManager.getConnection("jdbc:mysql://localhost/namedb", "name-local", "password");
             pst = sqlcon.prepareStatement(sql);
             pst.setString(1, txthost.getText());
             pst.setString(2, txtuser.getText());
@@ -418,7 +421,7 @@ public final class AppInterface extends javax.swing.JFrame {
     private void btnmodifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodifierActionPerformed
         try {
             String sql = "UPDATE stocktable SET hostname=?, username=?, computermodel=?, clavier=?, souris=?, courdent=?, casque=? WHERE id=?";
-            sqlcon = DriverManager.getConnection("jdbc:mysql://localhost/stockmts", "root", "Ay1425@@");
+            sqlcon = DriverManager.getConnection("jdbc:mysql://localhost/namedb", "name-local", "password");
             pst = sqlcon.prepareStatement(sql);
             pst.setString(8, txtid.getText());
             pst.setString(1, txthost.getText());
@@ -467,7 +470,7 @@ public final class AppInterface extends javax.swing.JFrame {
     private void btnsuprimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuprimActionPerformed
         try {
             String sql = "DELETE FROM stocktable WHERE id = ? OR (hostname = ? AND username = ?)";
-            sqlcon = DriverManager.getConnection("jdbc:mysql://localhost/stockmts", "root", "Ay1425@@");
+            sqlcon = DriverManager.getConnection("jdbc:mysql://localhost/namedb", "name-local", "password");
             pst = sqlcon.prepareStatement(sql);
             pst.setInt(1, Integer.parseInt(txtid.getText()));
             pst.setString(2, txthost.getText());
@@ -486,7 +489,7 @@ public final class AppInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsuprimActionPerformed
 public void showTableData(){
     try {
-        sqlcon = DriverManager.getConnection("jdbc:mysql://localhost/stockmts", "root", "Ay1425@@");
+        sqlcon = DriverManager.getConnection("jdbc:mysql://namedb", "name-local", "password");
         String sql = "SELECT * FROM stocktable";
         pst = sqlcon.prepareStatement(sql);
         rs = pst.executeQuery();
@@ -499,7 +502,7 @@ public void showTableData(){
 public void rechercherDonnees(String hostSearchTerm, String userSearchTerm, String pcSearchTerm) {
     try {
         // Établissez une connexion à la base de données
-        Connection sqlcon = DriverManager.getConnection("jdbc:mysql://localhost/stockmts", "root", "Ay1425@@");
+        Connection sqlcon = DriverManager.getConnection("jdbc:mysql://localhost/namedb", "name-local", "password");
 
         // Préparez la requête SQL de recherche
         String sql = "SELECT * FROM stocktable WHERE";
